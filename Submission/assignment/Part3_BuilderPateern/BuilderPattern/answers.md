@@ -1,4 +1,3 @@
-
 ## Task 3.1 — 20-Parameter Constructors
 
 ### 1. Why is a constructor with 20 parameters a problem?
@@ -20,28 +19,33 @@ We can put related information in separate classes. This makes the code easier t
 
 ### Why is the composed version better?
 
-1\. Single responsibility
+**1. Single responsibility**
 
 Each builder has one job:
 
+- `CustomerInfoBuilder` creates customer information.
 - `AddressBuilder` creates an address.
-- `OrderBuilder` creates order and payment details.
-- `InvoiceBuilder` puts everything together to create the invoice.
+- `OrderInfoBuilder` creates order and payment details.
+- `InvoiceBuilder` combines everything to create the invoice.
 
-2\. Independent validation
+**2. Easier to maintain**
 
-`AddressBuilder` checks that the address information is complete. `OrderBuilder` checks the order information. This means `InvoiceBuilder` does not need to check every detail itself.
+Each part has its own class and builder. If we need to change customer information or address details, we can work on that part without putting everything in one large builder.
 
-3\. Reuse
+**3. Reuse**
 
-We can use the same `AddressBuilder` for both billing and shipping addresses. This saves us from writing the same code twice.
+We can use the same `AddressBuilder` for both billing and shipping addresses. This avoids writing the same code twice.
 
-4\. Readability
+**4. Readability**
 
 The builder from Task 3.2 is easier to read than a constructor with 20 parameters, but it still handles all the properties.
 
-In Task 3.3, we use separate builders for addresses and order details. This makes the code clearer because each part has its own place.
+In Task 3.3, we use separate builders for customer information, addresses, and order details. The `InvoiceBuilder` only combines these parts to create the final invoice.
+
+**5. Mandatory and optional data**
+
+Mandatory data is passed through constructors. Optional data can be added using methods when needed. For example, the shipping address is optional, while the customer information and billing address are required.
 
 ### Conclusion
 
-The composed Builder pattern makes the code easier to read and change. Each builder has one job, and we can reuse it when we need it.
+The composed Builder pattern makes the code easier to read, maintain, and reuse. Each builder has one job, and the `InvoiceBuilder` combines the smaller parts to create the final invoice.
